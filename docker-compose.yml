@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  mysql-db:
+    image: mysql:8.0.17
+    environment:
+      MYSQL_ROOT_PASSWORD: CEtbUpkfwvVKF7Cz
+      MYSQL_DATABASE: 112app
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./config/my.conf:/etc/mysql/conf.d/config-file.cnf"
+      - "./data:/var/lib/mysql:rw"
+
+  my-scraper:
+    image: my-scraper:0.2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
